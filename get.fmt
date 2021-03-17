@@ -1,0 +1,8 @@
+awk 
+{{ $0 ~ /^[M|??|A|D|E|C|U]+$1/ arr[$1]++ }}
+	END {{ 
+		for ( key in arr ) 
+			printf("%s:%s ",key, arr[key]) 
+		printf("\n") 
+	}}
+
