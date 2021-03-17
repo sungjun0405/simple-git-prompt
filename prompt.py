@@ -54,7 +54,10 @@ symbol = {
 
 def check():
 	count = [x.split(':') for x in os.popen("git status -s . | awk -f ~/.git_prompt/get.fmt").read().split()]
-	stat= [ symbol[key] for key, val in count if len(key) == 1 and symbol[key] != "" ]
+	stat = set( 
+			[symbol.get(key[-1]) for key, val in count 
+			   if symbol.get(key[-1]) != None and symbol.get(key) != ""]
+			)
 	return '/'.join(stat)
 
 
